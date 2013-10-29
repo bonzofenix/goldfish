@@ -301,7 +301,6 @@
           afterContainer = container.next(),
           replacementContainer = $('<div/>',{'class':'md-preview','data-provider':'markdown-preview'}),
           content
-
       // Give flag that tell the editor enter preview mode
       this.$isPreview = true
       // Disable all buttons

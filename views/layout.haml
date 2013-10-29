@@ -5,26 +5,30 @@
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
     / Bootstrap
     %link{href: "/css/bootstrap.min.css", media: "screen", rel: "stylesheet"}/
+    %link{href: "/css/bootstrap-docs.css",media: "screen", rel: "stylesheet"}/
     %link{href: "/css/bootstrap-markdown.min.css", media: "screen", rel: "stylesheet"}/
     %link{href: "/css/application.css", rel: "stylesheet"}/
   %body
-    %a{href: "https://github.com/bonzofenix"}
+    %a{href: "#{GITHUB}" }
       %img{alt: "Fork me on GitHub", src: "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png", style: "position: absolute; top: 0; right: 0; border: 0;"}/
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
         %a{href: "#"}
-          %img.img-responsive.img-circle{src: "http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200"}/
+          %img.img-responsive.img-circle{src: "#{PROFILE_IMAGE}"}/
         = render_navigation
         %ul.nav.last-posts
           %h3
             Latests posts
-          %li.border-top
-            %a{href: "#"}
-              %h5 10/07 - creating asdo asdoi isd iwe
-              %p sds as asddd
+          -Post.all.each do |p|
+            %li.border-top
+              %a{href: "/posts/#{p.date.year}/#{p.date.month}/#{p.title.downcase.tr(" ","_")}"}
+                %h5= p.title
+                %p= p.short_description
       .col-md-8
         = yield
 
     %script{src: "//code.jquery.com/jquery.js"}
     %script{src: "/js/bootstrap.min.js"}
     %script{src: "/js/bootstrap-markdown.js"}
+    %script{src: "/js/markdown.js"}
+    %script{src: "/js/to-markdown.js"}

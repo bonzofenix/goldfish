@@ -1,8 +1,11 @@
 %form.form-horizontal{action: '/posts', method: 'post'}
   %input{name: "title", placeholder: "Title?", type: "text"}/
   %textarea{"data-provide" => "markdown", name: "content", rows: "10"}
+  %textarea{name: "short_description", rows: "5"}
+  %input{name: "categories", placeholder: "Categories(divided by ,)", type: "text"}/
   %label.checkbox
     %input{name: "publish", type: "checkbox"}/
     Publish
+
   %hr/
   %button.btn{type: "submit"} Submit
