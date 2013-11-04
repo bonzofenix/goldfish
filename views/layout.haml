@@ -21,7 +21,7 @@
             Latests posts
           -Post.all.each do |p|
             %li.border-top
-              %a{href: "/posts/#{p.date.year}/#{p.date.month}/#{p.title.downcase.tr(" ","_")}"}
+              %a{href: "#{show_url_for(p)}"}
                 %h5= p.title
                 %p= p.short_description
       .col-md-8

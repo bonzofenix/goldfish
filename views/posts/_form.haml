@@ -1,0 +1,21 @@
+%form{action: '/posts', role: 'form', method: 'post'}
+  - if post.new?
+    %input{ type: "hidden", name: "_method", value: 'PUT'}
+    %input{ type: "hidden", name: "id", value: "#{post.id}"}
+  .form-group
+    %label Title
+    %input.form-control{name: 'title', placeholder: "Title?", type: "text", value: "#{post.title}" }
+  .form-group
+    %label Content
+    %textarea.form-control{'data-provide' => 'markdown',required: true, name: 'content', rows: '10' , value: "#{post.content}" }
+  .form-group
+    %label Short description
+    %textarea.form-control{name: "short_description", rows: '5' , value: "#{post.short_description}" }
+  .form-group
+    %label Categories
+    %input.form-control{name: "categories", placeholder: "Categories", type: "text" , value: "#{post.categories ? post.categories.collect{|c| c.name}.join(',') : '' }" }
+  .checkbox
+    %label.checkbox
+      %input{name: "publish", type: "checkbox"}
+        Publish
+  %button.btn.btn-default{type: "submit"}= @post ? 'Update post' : 'Create post'

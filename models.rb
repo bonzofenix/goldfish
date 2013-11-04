@@ -12,6 +12,10 @@ class Post
   property :publish,  Boolean, required: true, default: false
   property :date,   DateTime, required: true, default: Date.today
   has n, :categories, :through => Resource
+
+  def new?
+    !saved?
+  end
 end
 
 class Category
