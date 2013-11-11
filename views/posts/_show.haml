@@ -1,9 +1,11 @@
 .post
   .post-title.page-header
-    %h2= post.title
+    %a{href: "#{show_url_for(post)}"}
+      %h2= post.title
   .post-content
     = markdown post.content
   .label.label-default
-    =post.date
+    created at:
+    =post.date.strftime('%Y-%m-%d')
   %hr
 

@@ -7,10 +7,10 @@ require 'redcarpet'
 require 'ostruct'
 require './models'
 require 'rack/codehighlighter'
-DataMapper::Logger.new(STDOUT, :debug)
+require 'coderay'
 
-use Rack::Codehighlighter, :coderay, :markdown => true,
-    :element => "pre>code", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
+use Rack::Codehighlighter, :coderay, markdown: true,
+    element: "code", pattern: /\A:::(\w+)\s*(\n|&#x000A;)/i, logging: false
 
 
 INDEX_CATEGORY = nil
@@ -70,9 +70,7 @@ end
 
 def find_post_for_title(params)
   title = params['title'].downcase.gsub('_',' ')
-  res = Post.all(conditions: ["LOWER(title) like ?", "%#{title}%"])
-    # logger.info res.inspect
-    res.first
+  Post.all(conditions: ["LOWER(title) like ?", "%#{title}%"]).first
 end
 
 def render_posts(category = nil)
