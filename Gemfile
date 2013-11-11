@@ -5,6 +5,8 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-partial'
 gem 'haml'
+gem 'coderay'
+gem 'rack-codehighlighter', :require => 'rack/codehighlighter'
 gem 'redcarpet'
 
 gem 'data_mapper'
@@ -13,6 +15,5 @@ gem 'sqlite3'
 
 group :development do
   gem 'shotgun'
-  gem 'debugger'
 end
 

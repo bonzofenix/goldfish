@@ -6,7 +6,11 @@ require 'haml'
 require 'redcarpet'
 require 'ostruct'
 require './models'
-require 'debugger'
+require 'rack/codehighlighter'
+DataMapper::Logger.new(STDOUT, :debug)
+
+use Rack::Codehighlighter, :coderay, :markdown => true,
+    :element => "pre>code", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 
 INDEX_CATEGORY = nil
@@ -66,7 +70,9 @@ end
 
 def find_post_for_title(params)
   title = params['title'].downcase.gsub('_',' ')
-  Post.find(conditions: ["LOWER(title) like '%?%'", title]).first
+  res = Post.all(conditions: ["LOWER(title) like ?", "%#{title}%"])
+    # logger.info res.inspect
+    res.first
 end
 
 def render_posts(category = nil)

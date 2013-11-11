@@ -1,8 +1,0 @@
----
-applications:
-- name: goldfish
-  memory: 256M
-  instances: 1
-  host: goldfish
-  domain: cfapps.io
-  path: .
