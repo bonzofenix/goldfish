@@ -1,5 +1,5 @@
 %form{action: '/posts', role: 'form', method: 'post'}
-  - unless post.new?
+  - if post.id
     %input{ type: "hidden", name: "_method", value: 'PUT'}
     %input{ type: "hidden", name: "id", value: "#{post.id}"}
   .form-group
@@ -14,8 +14,12 @@
     %textarea.form-control{name: "short_description", rows: '5'  }
       = post.short_description
   .form-group
-    %label Categories
-    %input.form-control{name: "categories", placeholder: "Categories", type: "text" , value: "#{post.categories ? post.categories.collect{|c| c.name}.join(',') : '' }" }
+    %label Tags
+    %input.form-control{name: "tags", placeholder: "Tags", type: "text"  }= post.tags ? post.tags.collect{|c| c.name}.join(',') : ''
+  .form-group
+    %label Friendly Url
+    %input.form-control{name: "friendly_url", placeholder: "This will let you get by /my_cool_custom_url", type: "text"  }
+      = post.friendly_url
   .checkbox
     %label.checkbox
       %input{name: "publish", type: "checkbox"}

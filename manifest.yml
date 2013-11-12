@@ -1,0 +1,8 @@
+---
+applications:
+- name: bonzofenix
+  memory: 256M
+  instances: 1
+  host: bonzofenix
+  domain: cfapps.io
+  path: .
