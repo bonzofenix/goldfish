@@ -19,7 +19,7 @@
         = render_navigation
         %ul.nav.last-posts
           %h3
-            Latests posts
+            Latest posts
           -Post.all.each do |p|
             %li.border-top
               %a{href: "#{show_url_for(p)}"}
