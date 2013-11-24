@@ -13,10 +13,10 @@
     .row.user-nav
       .col-md-10
         -if authenticated?
-          %a.pull-right{href: 'http://localhost:9292/logout'}
+          %a.pull-right{href: '/logout'}
             Logout
         - else
-          %a.pull-right{href: 'http://localhost:9292/auth/github'}
+          %a.pull-right{href: '/auth/github'}
             Login with Github
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
