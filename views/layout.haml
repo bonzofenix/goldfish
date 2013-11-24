@@ -10,8 +10,14 @@
     %link{href: "/css/application.css", rel: "stylesheet"}/
     %link{href: "/css/coderay.css", rel: "stylesheet"}/
   %body
-    %a{href: "#{GITHUB}" }
-      %img{alt: "Fork me on GitHub", src: "https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png", style: "position: absolute; top: 0; right: 0; border: 0;"}/
+    .row.user-nav
+      .col-md-10
+        -if authenticated?
+          %a.pull-right{href: 'http://localhost:9292/logout'}
+            Logout
+        - else
+          %a.pull-right{href: 'http://localhost:9292/auth/github'}
+            Login with Github
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
         %a{href: "#"}
@@ -22,7 +28,7 @@
             Latest posts
           -Post.all.each do |p|
             %li.border-top
-              %a{href: "#{show_url_for(p)}"}
+              %a{href: "#{p.show_url}"}
                 %h5= p.title
                 %p= p.short_description
       .col-md-8

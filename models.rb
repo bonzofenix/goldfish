@@ -12,12 +12,19 @@ class Post
   property :content, Text, required: true, required: true, default: ''
   property :friendly_url, String
   property :publish,  Boolean, required: true, default: false
-  property :date,   DateTime, required: true, default: Date.today
+  property :date,   DateTime, required: true, default: Time.now
   has n, :tags, :through => Resource
+
 
   def new?
     id == nil
   end
+
+  def show_url
+    "/posts/#{date.year}/#{date.month}/#{title.downcase.tr(" ","_")}"
+  end
+
+  default_scope(:default).update(:order => [:date.desc])
 end
 
 class Tag

@@ -2,15 +2,20 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'sinatra/namespace'
 require 'haml'
+require 'json'
 require 'redcarpet'
 require 'ostruct'
 require './models'
 require 'rack/codehighlighter'
 require 'coderay'
+require 'omniauth'
+require 'omniauth-github'
 
 
 use Rack::Codehighlighter, :coderay, markdown: true,
     element: "code", pattern: /\A:::(\w+)\s*(\n|&#x000A;)/i, logging: false
+
+
 
 
 INDEX_CATEGORY = nil
@@ -26,9 +31,10 @@ require 'sinatra/simple-navigation'
 
 enable :partial_underscores
 enable :method_override
+
 before do
     params.delete('_method')
-      params['id'] = params['id'].to_i if params['id']
+    params['id'] = params['id'].to_i if params['id']
 end
 
 get '/' do
@@ -49,7 +55,7 @@ namespace '/tags' do
 end
 
 namespace '/posts' do
-  get('/new') do
+  get '/new' do
     @post = Post.new
     haml :'posts/new'
   end
@@ -71,7 +77,7 @@ namespace '/posts' do
     redirect show_url_for(@post)
   end
 
-  get '/:year/:month/:title' do
+  delete '/:year/:month/:title' do
     @post = find_post_for_title(params)
     haml :'posts/show'
   end
@@ -84,9 +90,6 @@ namespace '/posts' do
   get { render_posts }
 end
 
-def show_url_for(post)
-  "/posts/#{post.date.year}/#{post.date.month}/#{post.title.downcase.tr(" ","_")}"
-end
 
 def find_post_for_title(params)
   title = params['title'].downcase.gsub('_',' ')
@@ -94,7 +97,70 @@ def find_post_for_title(params)
 end
 
 def render_posts(tag_name = nil)
-  @posts = ( tag_name ? Tag.first(name: tag_name).posts : Post.all )
+  @posts = ( tag_name ? Tag.first(name: tag_name).posts : Post.all)
   haml :'posts/index'
 end
 
+#------------ AUTHENTICATION ---------------
+
+use OmniAuth::Builder do
+  provider :github, 'b4cb81a0fbc5c85dcff0', 'cb6e1a55fc3e43f416b3f28c82bb0f661e7728bd'
+end
+
+get '/auth/:provider/callback' do
+    setup_goldfish_owner
+    return unless authenticated?
+    save_github_json
+    redirect '/'
+end
+
+get '/auth/failure' do
+  erb "<h1>Authentication Failed:</h1><h3>message:<h3> <pre>#{params}</pre>"
+end
+
+get '/auth/:provider/deauthorized' do
+  erb "#{params[:provider]} has deauthorized this app."
+end
+
+get '/logout' do
+  session[:authenticated] = false
+  redirect '/'
+end
+def setup_goldfish_owner
+  save_github_json unless File.exists?(json_file)
+end
+
+def save_github_json
+  File.open('github_user_info.json', "w+") do |f|
+    f.write(request.env['omniauth.auth'].to_json)
+  end
+end
+
+def goldfish_owner
+  JSON.parse(File.read('github_user_info.json'))
+end
+
+def goldfish_authenticated
+  request.env['omniauth.auth']
+end
+
+def authenticated?
+  if session[:authenticated]
+    true
+  elsif File.exists?(json_file)
+    owner = goldfish_owner.fetch('info').fetch('nickname')
+    logged_user = goldfish_authenticated.fetch('info').fetch('nickname') if goldfish_authenticated
+    if owner == logged_user
+      session[:authenticated] = true
+      true
+    else
+      false
+    end
+  else
+    false
+  end
+end
+
+def json_file
+  'github_user_info.json'
+end
