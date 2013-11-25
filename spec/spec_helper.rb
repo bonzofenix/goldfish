@@ -1,5 +1,6 @@
-# require 'database_cleaner'
 require 'goldfish'
+require 'database_cleaner'
+require 'factory_girl'
 require 'dm-transactions'
 
 require 'rack/test'
@@ -17,17 +18,19 @@ OmniAuth.config.mock_auth[:github] = {
   }
 }
 
+FactoryGirl.find_definitions
 
-# For RSpec 2.x
 RSpec.configure do |c|
   c.include Rack::Test::Methods
-  def app() described_class end
-  # c.before do
-# request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
-      # # DatabaseCleaner.start
-  # end
+  c.include FactoryGirl::Syntax::Methods
 
-  # c.after :each do
-      # DatabaseCleaner.clean
-  # end
+  def app() described_class end
+  c.before do
+    # request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+    DatabaseCleaner.start
+  end
+
+  c.after :each do
+      DatabaseCleaner.clean
+  end
 end

@@ -1,6 +1,6 @@
 require 'data_mapper'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/development.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/#{ENV['RACK_ENV']}.db")
 DataMapper::Model.raise_on_save_failure = true
 
 class Post

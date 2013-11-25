@@ -11,6 +11,7 @@ gem 'coderay'
 gem 'rack-codehighlighter', :require => 'rack/codehighlighter'
 gem 'redcarpet'
 gem 'json'
+gem "factory_girl"
 
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'

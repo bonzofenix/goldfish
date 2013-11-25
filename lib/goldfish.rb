@@ -12,6 +12,7 @@ require 'json'
 require 'redcarpet'
 require 'ostruct'
 require_relative 'models'
+require 'rack/codehighlighter'
 require 'coderay'
 require 'omniauth'
 require 'omniauth-github'
@@ -52,10 +53,8 @@ class Goldfish < Sinatra::Base
     end
   end
 
-  namespace '/tags' do
-    Tag.all.each do |tag|
-      get("tags/#{tag.name}"){ render_posts tag.name }
-    end
+  get '/tags/:name' do
+ render_posts params['name']
   end
 
   namespace '/posts' do
