@@ -46,15 +46,14 @@ class Goldfish < Sinatra::Base
     render_posts
   end
 
-  Post.all(:friendly_url.not => nil ).each do |p|
-    get(p.friendly_url) do
-      @post = p
-      haml :'posts/show'
-    end
+  not_found do
+    puts request.env['PATH_INFO']
+    @post = Post.first(:friendly_url => request.env['PATH_INFO'])
+    haml :'posts/show' if @post && request.env['REQUEST_METHOD']== 'GET'
   end
 
   get '/tags/:name' do
- render_posts params['name']
+    render_posts params['name']
   end
 
   namespace '/posts' do
@@ -71,24 +70,30 @@ class Goldfish < Sinatra::Base
       Post.new(params).save
     end
 
-    put do
-      @post = Post.get(params['id'].to_i)
-      params['tags'] = params['tags'].split(',').collect do |name|
-        Tag.first_or_create(name: name.strip )
-      end
-      @post.update(params) if @post
-      redirect show_url_for(@post)
-    end
+    # put do
+      # @post = Post.get(params['id'].to_i)
+      # params['tags'] = params['tags'].split(',').collect do |name|
+        # Tag.first_or_create(name: name.strip )
+      # end
+      # @post.update(params) if @post
+      # redirect @post.show_url()
+    # end
 
-    delete '/:year/:month/:title' do
+    # delete '/:year/:month/:title' do
+      # @post = find_post_for_title(params)
+      # @post.destroy
+    # end
+
+    get '/:year/:month/:title' do
       @post = find_post_for_title(params)
       haml :'posts/show'
     end
 
-    get '/:year/:month/:title/edit' do
-      @post = find_post_for_title(params)
-      haml :'posts/edit'
-    end
+
+    # get '/:year/:month/:title/edit' do
+      # @post = find_post_for_title(params)
+      # haml :'posts/edit'
+    # end
 
     get { render_posts }
   end

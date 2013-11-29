@@ -1,7 +1,7 @@
 require 'rspec/core/rake_task'
 require 'pry'
 
-lib = File.expand_path '.'
+lib = File.expand_path './lib'
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'goldfish'
 

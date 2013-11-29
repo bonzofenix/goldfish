@@ -1,11 +1,10 @@
 require 'data_mapper'
-
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/#{ENV['RACK_ENV']}.db")
-DataMapper::Model.raise_on_save_failure = true
+sqlite_path = "sqlite3://#{Dir.pwd}/db/#{ENV['RACK_ENV']}.db"
+DataMapper.setup(:default, ENV['DATABASE_URL'] || sqlite_path )
+DataMapper::Model.raise_on_save_failure = false
 
 class Post
   include DataMapper::Resource
-  # default_order [:date.desc]
   property :id,     Serial
   property :title,  String, required: true, unique: true , default: ''
   property :short_description, String, required: true, default: ''

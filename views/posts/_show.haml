@@ -1,4 +1,15 @@
 .post
+  .post-actions
+    .nav
+      -# -if authenticated?
+      -# %form{action: "#{post.show_url()}", method: "post"}
+        -# %input{name: "_method", type: "hidden", value: "delete"}
+        -# %button{type: "submit","data-confirm" => "Are you sure?" ,class: 'linkButton'}
+          -# %span.glyphicon.glyphicon-remove
+          -# Destroy
+      -# %a{href: "#{post.show_url}/edit"}
+        -# %span.glyphicon.glyphicon-edit
+        -# edit
   .post-title.page-header
     %a{href: "#{post.show_url}"}
       %h2= post.title
@@ -7,5 +18,9 @@
   .label.label-default
     created at:
     =post.date.strftime('%Y-%m-%d')
+  .tags
+    - post.tags.each do |t|
+      .label.label-default
+        = t.name
   %hr
 

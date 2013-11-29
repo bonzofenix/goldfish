@@ -4,20 +4,26 @@
     %title Bonzofenix
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
     / Bootstrap
+    %link{href: "/css/application.css", rel: "stylesheet"}/
     %link{href: "/css/bootstrap.min.css", media: "screen", rel: "stylesheet"}/
     %link{href: "/css/bootstrap-docs.css",media: "screen", rel: "stylesheet"}/
     %link{href: "/css/bootstrap-markdown.min.css", media: "screen", rel: "stylesheet"}/
-    %link{href: "/css/application.css", rel: "stylesheet"}/
     %link{href: "/css/coderay.css", rel: "stylesheet"}/
   %body
     .row.user-nav
       .col-md-11
-        -if authenticated?
-          %a.pull-right{href: '/logout'}
-            Logout
-        - else
-          %a.pull-right{href: '/auth/github'}
-            Login with Github
+        -# .nav
+          -# -if authenticated?
+            -# %a.pull-right{href: '/posts/new'}
+              -# %span.glyphicon.glyphicon-plus
+              -# New post
+            -# %a.pull-right{href: '/logout'}
+              -# %span.glyphicon.glyphicon-log-out
+              -# Logout
+          -# - else
+            -# %a.pull-right{href: '/auth/github'}
+              -# %span.glyphicon.glyphicon-log-in
+              -# Login with Github
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
         %a{href: "#"}
@@ -39,3 +45,4 @@
     %script{src: "/js/bootstrap-markdown.js"}
     %script{src: "/js/markdown.js"}
     %script{src: "/js/to-markdown.js"}
+    %script{src: "/js/application.js"}

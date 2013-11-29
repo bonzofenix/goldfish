@@ -5,7 +5,7 @@ FactoryGirl.define do
 
   to_create do |instance|
     if !instance.save
-      raise "Save failed for #{instance.class} error: #{instance.errors}"
+      raise "Save failed for #{instance.class} error: #{instance.errors.map{|e| e.inspect}}"
     end
   end
 
@@ -13,6 +13,8 @@ FactoryGirl.define do
     title
     short_description 'this is a short description'
     content 'some content'
+    publish true
+    date Time.now
   end
 
 

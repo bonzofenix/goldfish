@@ -1,0 +1,5 @@
+--colour
+--drb
+--tag ~driver:selenium_chrome
+--profile
+--pattern 'spec/*[^(acceptance)]/**/*_spec.rb'

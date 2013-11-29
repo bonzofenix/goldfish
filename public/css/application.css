@@ -1,3 +1,15 @@
+.nav a{
+  padding: 0px 8px;
+}
+.linkButton {
+     background: none;
+        border: none;
+           color: #428bca;
+           text-decoration: none;
+                 cursor: pointer;
+               }
+
+
 .border-right {
   border-right:1px solid #e6e6e6;
 }

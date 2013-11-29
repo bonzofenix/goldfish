@@ -1,10 +1,11 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'goldfish'
 require 'database_cleaner'
 require 'factory_girl'
 require 'dm-transactions'
 
 require 'rack/test'
-
 
 
 # DatabaseCleaner[:data_mapper].strategy = :transaction
@@ -27,10 +28,11 @@ RSpec.configure do |c|
   def app() described_class end
   c.before do
     # request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+      DatabaseCleaner.clean
     DatabaseCleaner.start
   end
 
-  c.after :each do
+  c.after do
       DatabaseCleaner.clean
   end
 end
