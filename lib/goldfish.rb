@@ -92,7 +92,7 @@ class Goldfish < Sinatra::Base
 
     delete '/:year/:month/:title' do
       @post = find_post_for_title(params)
-      @post.destroy
+      @post.destroy!
     end
 
     get '/:year/:month/:title' do
