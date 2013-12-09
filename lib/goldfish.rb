@@ -119,7 +119,11 @@ class Goldfish < Sinatra::Base
   #------------ AUTHENTICATION ---------------
 
   use OmniAuth::Builder do
-    provider :github, 'b4cb81a0fbc5c85dcff0', 'cb6e1a55fc3e43f416b3f28c82bb0f661e7728bd'
+    if ENV['RACK_ENV'] == 'development'
+      provider :github, 'b4cb81a0fbc5c85dcff0', 'cb6e1a55fc3e43f416b3f28c82bb0f661e7728bd'
+    else
+      provider :github, '1cd92b878b0360a58a62', '5bcd838aae2e9ea303a9198b50232bdd8f4ba5e2'
+    end
   end
 
   get '/auth/:provider/callback' do
