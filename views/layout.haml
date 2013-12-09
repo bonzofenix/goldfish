@@ -12,18 +12,18 @@
   %body
     .row.user-nav
       .col-md-11
-        -# .nav
-          -# -if authenticated?
-            -# %a.pull-right{href: '/posts/new'}
-              -# %span.glyphicon.glyphicon-plus
-              -# New post
-            -# %a.pull-right{href: '/logout'}
-              -# %span.glyphicon.glyphicon-log-out
-              -# Logout
-          -# - else
-            -# %a.pull-right{href: '/auth/github'}
-              -# %span.glyphicon.glyphicon-log-in
-              -# Login with Github
+        .nav
+          -if authenticated?
+            %a.pull-right{href: '/posts/new'}
+              %span.glyphicon.glyphicon-plus
+              New post
+            %a.pull-right{href: '/logout'}
+              %span.glyphicon.glyphicon-log-out
+              Logout
+          - else
+            %a.pull-right{href: '/auth/github'}
+              %span.glyphicon.glyphicon-log-in
+              Login with Github
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
         %a{href: "#"}

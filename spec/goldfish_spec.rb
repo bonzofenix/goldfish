@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Goldfish do
+    let(:post){ create :post }
+  # def session=
+    # Rack::Session::Abstract::SessionHash.stub(:new).and_return(session)
+# end
   it 'GET /' do
     get '/'
     last_response.should be_ok
@@ -12,6 +16,25 @@ describe Goldfish do
       get "/tags/#{t1.name}"
       last_response.body.should include(t1.name)
       last_response.body.should_not include(t2.name)
+    end
+  end
+  describe 'protected endpoints' do
+    describe 'when user is not logged in' do
+      it 'permission denied on PUT /posts' do
+        get "#{post.show_url}/edit"
+        last_response.status.should be(401)
+      end
+    end
+
+    describe 'when user logged in' do
+      before do
+        get '/auth/github'
+      end
+
+      it 'permission denied on PUT /posts' do
+        get "#{post.show_url}/edit"
+        last_response.status.should be_success
+      end
     end
   end
 

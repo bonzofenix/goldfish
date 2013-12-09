@@ -32,6 +32,12 @@ class Goldfish < Sinatra::Base
   # set :root, File.dirname(__FILE__)
   register Sinatra::Namespace, Sinatra::Partial
   register Sinatra::SimpleNavigation
+  set(:require_auth) do |auth|
+    condition do
+      halt 401 unless authenticated?
+    end
+  end
+
 
   enable :sessions
   enable :partial_underscores
@@ -57,32 +63,37 @@ class Goldfish < Sinatra::Base
   end
 
   namespace '/posts' do
-    get '/new' do
+    get '/new', require_auth: true  do
       @post = Post.new
       haml :'posts/new'
     end
 
-    post do
+
+    post require_auth: true do
       params['publish'] = (params['publish'] == 'on' ? true : false)
       params['tags'] = params['tags'].split(',').collect do |name|
         Tag.first_or_create(name: name.strip )
       end
       Post.new(params).save
     end
+    get '/:year/:month/:title/edit', require_auth: true do
+      @post = find_post_for_title(params)
+      haml :'posts/edit'
+    end
 
-    # put do
-      # @post = Post.get(params['id'].to_i)
-      # params['tags'] = params['tags'].split(',').collect do |name|
-        # Tag.first_or_create(name: name.strip )
-      # end
-      # @post.update(params) if @post
-      # redirect @post.show_url()
-    # end
+    put require_auth: true do
+      @post = Post.get(params['id'].to_i)
+      params['tags'] = params['tags'].split(',').collect do |name|
+        Tag.first_or_create(name: name.strip )
+      end
+      @post.update(params) if @post
+      redirect @post.show_url()
+    end
 
-    # delete '/:year/:month/:title' do
-      # @post = find_post_for_title(params)
-      # @post.destroy
-    # end
+    delete '/:year/:month/:title' do
+      @post = find_post_for_title(params)
+      @post.destroy
+    end
 
     get '/:year/:month/:title' do
       @post = find_post_for_title(params)
@@ -90,10 +101,6 @@ class Goldfish < Sinatra::Base
     end
 
 
-    # get '/:year/:month/:title/edit' do
-      # @post = find_post_for_title(params)
-      # haml :'posts/edit'
-    # end
 
     get { render_posts }
   end
@@ -118,7 +125,7 @@ class Goldfish < Sinatra::Base
   get '/auth/:provider/callback' do
     setup_goldfish_owner
     return unless authenticated?
-    save_github_json
+    save_goldfish_owner
     redirect '/'
   end
 
@@ -134,42 +141,38 @@ class Goldfish < Sinatra::Base
     session[:authenticated] = false
     redirect '/'
   end
+
   def setup_goldfish_owner
-    save_github_json unless File.exists?(json_file)
+    save_goldfish_owner unless File.exists?(owner_filename)
   end
 
-  def save_github_json
+  def save_goldfish_owner
     File.open('github_user_info.json', "w+") do |f|
       f.write(request.env['omniauth.auth'].to_json)
     end
   end
 
   def goldfish_owner
-    JSON.parse(File.read('github_user_info.json'))
+    JSON.parse(File.read(owner_filename)).fetch('info') if File.exists?(owner_filename)
   end
 
-  def goldfish_authenticated
-    request.env['omniauth.auth']
+  def logged_user
+    request.env['omniauth.auth'].fetch('info') if request.env['omniauth.auth']
+  end
+
+
+  def owner_filename
+    'github_user_info.json'
   end
 
   def authenticated?
     if session[:authenticated]
       true
-    elsif File.exists?(json_file)
-      owner = goldfish_owner.fetch('info').fetch('nickname')
-      logged_user = goldfish_authenticated.fetch('info').fetch('nickname') if goldfish_authenticated
-      if owner == logged_user
-        session[:authenticated] = true
-        true
-      else
-        false
-      end
+    elsif goldfish_owner && logged_user && goldfish_owner.fetch('nickname') == logged_user.fetch('nickname')
+      session[:authenticated] = true
     else
-      false
+      session[:authenticated] = nil
     end
   end
 
-  def json_file
-    'github_user_info.json'
-  end
 end
