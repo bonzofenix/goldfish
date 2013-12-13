@@ -11,3 +11,7 @@ task(:console) do
   pry
 end
 
+task(:deploy) do
+  sh 'cf file bonzofenix app/db/production.db > db/production.db'
+  sh 'cf push'
+end

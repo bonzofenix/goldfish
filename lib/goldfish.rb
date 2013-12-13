@@ -22,7 +22,7 @@ PROFILE_IMAGE = 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739
 GITHUB  = 'https://github.com/bonzofenix'
 SIDEBAR_LINKS =
   [
-    {text: 'About Me', url: '/about_me'},
+    {text: 'About Me', url: '/posts/2013/11/about_me'},
     {text: 'Technology', url: '/tags/technology'}
 ]
 
