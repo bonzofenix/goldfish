@@ -108,6 +108,7 @@ GEM
     json_pure (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    method_source (0.8.2)
     mime-types (2.0)
     mini_portile (0.5.2)
     minitest (4.7.5)
@@ -131,6 +132,10 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    pry (0.9.12.4)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-codehighlighter (0.5.0)
       nokogiri (>= 1.4.1)
@@ -159,6 +164,8 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-basic-auth (0.1.0)
+      sinatra
     sinatra-contrib (1.4.1)
       backports (>= 2.0)
       multi_json
@@ -172,6 +179,7 @@ GEM
       sinatra
     sinatra-simple-navigation (3.6.0)
       simple-navigation (>= 3.10.1)
+    slop (3.4.7)
     sqlite3 (1.3.8)
     stringex (1.5.1)
     thread_safe (0.1.3)
@@ -184,6 +192,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   cf
   coderay
   data_mapper
@@ -195,12 +204,14 @@ DEPENDENCIES
   json
   omniauth
   omniauth-github
+  pry
   rack-codehighlighter
   rack-test
   redcarpet
   rspec
   shotgun
   sinatra
+  sinatra-basic-auth
   sinatra-namespace
   sinatra-partial
   sinatra-simple-navigation

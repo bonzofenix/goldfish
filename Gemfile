@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sinatra-simple-navigation'
 gem 'sinatra-partial'
 gem 'sinatra-namespace'
+gem 'sinatra-basic-auth'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'haml'
@@ -26,6 +27,8 @@ group :cloudfoundry do
 end
 group :development, :test do
   gem 'debugger'
+  gem 'bundler'
+  gem 'pry'
   gem 'rspec'
   gem 'rack-test'
   gem 'database_cleaner'

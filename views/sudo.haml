@@ -1,0 +1,16 @@
+%table
+  -Post.all.each do |post|
+    %tr
+      %td
+        %a{href: "#{post.show_url}"}
+          =post.title
+      %td
+        %form{action: "#{post.show_url()}", method: "post"}
+          %input{name: "_method", type: "hidden", value: "delete"}
+          %button{type: "submit","data-confirm" => "Are you sure?" ,class: 'linkButton'}
+            %span.glyphicon.glyphicon-remove
+            Destroy
+      %td
+        %a{href: "#{post.show_url}/edit"}
+          %span.glyphicon.glyphicon-edit
+          edit

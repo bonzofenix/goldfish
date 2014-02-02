@@ -13,17 +13,12 @@
     .row.user-nav
       .col-md-11
         .nav
-          -if authenticated?
-            %a.pull-right{href: '/posts/new'}
-              %span.glyphicon.glyphicon-plus
-              New post
-            %a.pull-right{href: '/logout'}
-              %span.glyphicon.glyphicon-log-out
-              Logout
-          - else
-            %a.pull-right{href: '/auth/github'}
-              %span.glyphicon.glyphicon-log-in
-              Login with Github
+          %a.pull-right{href: '/sudo'}
+            %span.glyphicon.glyphicon-log-in
+            Sudo
+            -# %a.pull-right{href: '/posts/new'}
+              -# %span.glyphicon.glyphicon-plus
+              -# New post
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
         %a{href: "#"}
@@ -36,7 +31,6 @@
             %li.border-top
               %a{href: "#{p.show_url}"}
                 %h5= p.title
-                %p= p.short_description
       .col-md-8
         = yield
 
