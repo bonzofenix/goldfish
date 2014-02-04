@@ -7,7 +7,7 @@ class Post
   include DataMapper::Resource
   property :id,     Serial
   property :title,  String, required: true, unique: true , default: ''
-  property :short_description, String, required: true, default: ''
+  property :short_description, String,  default: ''
   property :content, Text, required: true, required: true, default: ''
   property :friendly_url, String
   property :publish,  Boolean, required: true, default: false

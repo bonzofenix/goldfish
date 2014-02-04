@@ -9,10 +9,10 @@
     %label Content
     %textarea.form-control{'data-provide' => 'markdown',
       required: true, name: 'content', rows: '40' }= post.content
-  .form-group
-    %label Short description
-    %textarea.form-control{name: "short_description", rows: '5'  }
-      = post.short_description
+  -# .form-group
+    -# %label Short description
+    -# %textarea.form-control{name: "short_description", rows: '5'  }
+      -# = post.short_description
   .form-group
     %label Tags
     %input.form-control{name: "tags", placeholder: "Tags", type: "text"  }= post.tags ? post.tags.collect{|c| c.name}.join(',') : ''
