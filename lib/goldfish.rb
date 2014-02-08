@@ -18,18 +18,15 @@ require 'rack/codehighlighter'
 require 'coderay'
 
 config_file 'config/application.yml'
-authorize do |username, password|
-  username == settings.username && password == settings.password
-end
-
-PROFILE_IMAGE = settings.profile_image
-SIDEBAR_LINKS = settings.sidebar_links
-DISQUS_SHORTNAME = settings.disqus_shortname
-
+$settings = settings
 class Goldfish < Sinatra::Base
   register Sinatra::Namespace, Sinatra::Partial
   register Sinatra::SimpleNavigation
   register Sinatra::BasicAuth
+
+  authorize do |username, password|
+    username == $settings.username && password == $settings.password
+  end
 
 
   enable :sessions
