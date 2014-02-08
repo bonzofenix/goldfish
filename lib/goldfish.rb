@@ -24,6 +24,7 @@ end
 
 PROFILE_IMAGE = settings.profile_image
 SIDEBAR_LINKS = settings.sidebar_links
+DISQUS_SHORTNAME = settings.disqus_shortname
 
 class Goldfish < Sinatra::Base
   register Sinatra::Namespace, Sinatra::Partial
