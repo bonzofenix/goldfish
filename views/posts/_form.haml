@@ -15,7 +15,10 @@
       -# = post.short_description
   .form-group
     %label Tags
-    %input.form-control{name: "tags", placeholder: "Tags", type: "text"  }= post.tags ? post.tags.collect{|c| c.name}.join(',') : ''
+    %input.form-control{name: "tags", 'data-role'=> 'tagsinput',
+      value: "#{post.tags ? post.tags.collect{|c| c.name}.join(',') : ''}",
+      type: "text"  }
+
   .form-group
     %label Friendly Url
     %input.form-control{name: "friendly_url", placeholder: "This will let you get by /my_cool_custom_url", type: "text"  }

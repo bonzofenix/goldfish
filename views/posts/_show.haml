@@ -6,13 +6,13 @@
       %h2= post.title
   .post-content
     = markdown post.content
-  .label.label-default
-    created at:
-    =post.date.strftime('%Y-%m-%d')
-  .tags
+  .bootstrap-tagsinput
+    %span.tag.label.label-success
+      created at:
+      =post.date.strftime('%Y-%m-%d')
     - post.tags.each do |t|
-      .label.label-default
-        = t.name
+      %span.tag.label.label-info
+        %a{href: "/tags/#{t.name}"}= t.name
   %hr
   - if @comments
     .comments
