@@ -29,7 +29,6 @@ GITHUB  = 'https://github.com/bonzofenix'
 SIDEBAR_LINKS =
   [
     {text: 'About Me', url: '/posts/2013/11/about_me'},
-    {text: 'Email me', url: 'mailto:bonzofenix@gmail.com'},
     {text: 'Github', url: GITHUB},
     {text: 'Technology', url: '/tags/technology'}
 ]
