@@ -18,21 +18,12 @@ require 'rack/codehighlighter'
 require 'coderay'
 
 config_file 'config/application.yml'
-
 authorize do |username, password|
   username == settings.username && password == settings.password
 end
 
-INDEX_CATEGORY = nil
-PROFILE_IMAGE = 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200'
-GITHUB  = 'https://github.com/bonzofenix'
-SIDEBAR_LINKS =
-  [
-    {text: 'About Me', url: '/posts/2013/11/about_me'},
-    {text: 'Github', url: GITHUB},
-    {text: 'Technology', url: '/tags/technology'}
-]
-
+PROFILE_IMAGE = settings.profile_image
+SIDEBAR_LINKS = settings.sidebar_links
 
 class Goldfish < Sinatra::Base
   register Sinatra::Namespace, Sinatra::Partial

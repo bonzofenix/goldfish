@@ -1,2 +1,8 @@
-username: admin
-password: admin
+authentication:
+  username: admin
+  password: admin
+profile_image: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200'
+- text: Github
+  url: https://github.com/bonzofenix
+
+
