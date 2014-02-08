@@ -20,10 +20,16 @@ Play with the [example](goldfish.cfapps.io)(username: admin ,password: admin).
 
 ```bash
   cp config/application.example.ymp config/application.yml
-  vi config/application.yml #edit your user and password.
-  
-  vi lib/goldfish.rb #customize links
+  vi config/application.yml #set your personal configurations.
+
   #push it to your favourite cloud!
+```
+
+## Running it locally to test your configurations:
+
+```
+bundle install
+shotgun
 ```
 
 ## Contributing
