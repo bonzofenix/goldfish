@@ -108,6 +108,7 @@ class Goldfish < Sinatra::Base
 
     get '/:year/:month/:title' do
       @post = find_post_for_title(params)
+      @comments = true
       haml :'posts/show'
     end
 
