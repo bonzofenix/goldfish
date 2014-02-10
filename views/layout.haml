@@ -8,6 +8,7 @@
     %link{href: "/css/bootstrap.min.css", media: "screen", rel: "stylesheet"}/
     %link{href: "/css/bootstrap-docs.css",media: "screen", rel: "stylesheet"}/
     %link{href: "/css/bootstrap-markdown.min.css", media: "screen", rel: "stylesheet"}/
+    %link{href: "/css/font-awesome.min.css", media: "screen", rel: "stylesheet"}/
     %link{href: "/css/coderay.css", rel: "stylesheet"}/
   %body
     .row.user-nav
@@ -18,6 +19,17 @@
             Sudo
     .row.main-content
       .col-md-2.col-md-offset-1.border-right
+        .links
+          -if $settings.respond_to? :github
+            %a.fa.fa-github.fa-3{ href: $settings.github, target: "_blank" }
+          -if $settings.respond_to? :linkedin
+            %a.fa.fa-linkedin.fa-3{ href: $settings.linkedin, target: "_blank" }
+          -if $settings.respond_to? :twitter
+            %a.fa.fa-twitter.fa-3{ href: $settings.twitter, target: "_blank"}
+          -if $settings.respond_to? :email
+            %a.fa.fa-envelope.fa-3{ href: "mailto:#{$settings.email}" }
+
+
         %a{href: "/"}
           %img.img-responsive.img-circle{src: "#{$settings.profile_image}"}/
         = render_navigation

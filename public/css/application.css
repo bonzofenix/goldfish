@@ -2,13 +2,18 @@
   padding: 0px 8px;
 }
 .linkButton {
-     background: none;
-        border: none;
-           color: #428bca;
-           text-decoration: none;
-                 cursor: pointer;
-               }
+  background: none;
+  border: none;
+  color: #428bca;
+  text-decoration: none;
+  cursor: pointer;
+}
 
+.links a{
+   font-size: 3em;
+   color: #333;
+}
+.links a:hover { text-decoration: none; }
 
 .border-right {
   border-right:1px solid #e6e6e6;
