@@ -1,9 +1,14 @@
-authentication:
-  username: admin
-  password: admin
-disqus_shortname: bonzofenix
-profile_image: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200'
-- text: Github
-  url: https://github.com/bonzofenix
-
+username: admin
+password: admin
+# profile_image: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200'
+# disqus_shortname: disqus_id
+# github: https://github.com/you
+# linkedin: http://www.linkedin.com/pub/you/22/1b/424
+# twitter: https://twitter.com/you
+# email: you@gmail.com
+# sidebar_links:
+# - text: About me
+  # url: /posts/2013/11/about_me
+# - text: A Tag
+  # url: /tags/a_tag
 

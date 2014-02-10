@@ -30,8 +30,9 @@
             %a.fa.fa-envelope.fa-3{ href: "mailto:#{$settings.email}" }
 
 
-        %a{href: "/"}
-          %img.img-responsive.img-circle{src: "#{$settings.profile_image}"}/
+        -if $settings.respond_to? :profile_image
+          %a{href: "/"}
+            %img.img-responsive.img-circle{src: "#{$settings.profile_image}"}/
         = render_navigation
         %ul.nav.last-posts
           %h3
