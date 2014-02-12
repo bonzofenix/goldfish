@@ -39,7 +39,12 @@ class Goldfish < Sinatra::Base
   end
 
   get '/' do
-    render_posts
+    if $settings.respond_to? :post_in_index
+      @post = find_post_for_title($settings.post_in_index)
+      haml :'posts/show'
+    else
+      render_posts
+    end
   end
 
   protect do
@@ -75,7 +80,7 @@ class Goldfish < Sinatra::Base
       end
 
       get '/:year/:month/:title/edit' do
-        @post = find_post_for_title(params)
+        @post = find_post_for_title(params['title'])
         haml :'posts/edit'
       end
 
@@ -90,12 +95,12 @@ class Goldfish < Sinatra::Base
     end
 
     delete '/:year/:month/:title' do
-      @post = find_post_for_title(params)
+      @post = find_post_for_title(params['title'])
       @post.destroy!
     end
 
     get '/:year/:month/:title' do
-      @post = find_post_for_title(params)
+      @post = find_post_for_title(params['title'])
       @comments = true
       haml :'posts/show'
     end
@@ -106,8 +111,8 @@ class Goldfish < Sinatra::Base
   end
 
 
-  def find_post_for_title(params)
-    title = params['title'].downcase.gsub('_',' ')
+  def find_post_for_title(title)
+    title = title.downcase.gsub('_',' ')
     Post.first(conditions: ["LOWER(title) like ?", "%#{title}%"])
   end
 

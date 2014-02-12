@@ -23,9 +23,6 @@ group :development do
   gem 'shotgun'
 end
 
-group :cloudfoundry do
-  gem 'cf'
-end
 group :development, :test do
   gem 'debugger'
   gem 'bundler'
