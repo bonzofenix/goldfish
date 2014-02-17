@@ -1,6 +1,7 @@
 username: admin
 password: admin
 # profile_image: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=200'
+# favicon_url: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=16'
 # disqus_shortname: disqus_id
 # github: https://github.com/you
 # linkedin: http://www.linkedin.com/pub/you/22/1b/424
