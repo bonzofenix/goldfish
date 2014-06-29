@@ -30,7 +30,7 @@ class Goldfish < Sinatra::Base
     username == $settings.username && password == $settings.password
   end
 
-  config_file "#{ENV['HOME']}/config/application.yml"
+  config_file "#{Dir.pwd}/config/application.yml"
   $settings = settings
 
   enable :sessions
