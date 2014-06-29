@@ -1,0 +1,11 @@
+username: admin
+password: admin
+post_in_index: about_me
+profile_image: '/goldfish.jpg'
+favicon_url: 'http://www.gravatar.com/avatar/0cba58b9292100591739880d96f5f739.png?s=32'
+disqus_shortname: bonzofenix
+github: https://github.com/bonzofenix
+linkedin: http://www.linkedin.com/pub/alan-mor%C3%A1n/22/1b/424
+twitter: https://twitter.com/bonzofenix
+email: bonzofenix@gmail.com
+

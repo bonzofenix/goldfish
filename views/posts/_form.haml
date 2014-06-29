@@ -1,30 +1,30 @@
 %form{action: '/posts', role: 'form', method: 'post'}
   - if post.id
     %input{ type: "hidden", name: "_method", value: 'PUT'}
-    %input{ type: "hidden", name: "id", value: "#{post.id}"}
+    %input{ type: "hidden", name: "post[id]", value: "#{post.id}"}
   .form-group
     %label Title
-    %input.form-control{name: 'title', placeholder: "Title?", type: "text", value: "#{post.title}" }
+    %input.form-control{name: 'post[title]', placeholder: "Title?", type: "text", value: "#{post.title}" }
   .form-group
     %label Content
     %textarea.form-control{'data-provide' => 'markdown',
-      required: true, name: 'content', rows: '40' }= post.content
+      required: true, name: 'post[content]', rows: '40' }= post.content
   -# .form-group
     -# %label Short description
     -# %textarea.form-control{name: "short_description", rows: '5'  }
       -# = post.short_description
   .form-group
     %label Tags
-    %input.form-control{name: "tags", 'data-role'=> 'tagsinput',
+    %input.form-control{name: "post[tags]", 'data-role'=> 'tagsinput',
       value: "#{post.tags ? post.tags.collect{|c| c.name}.join(',') : ''}",
       type: "text"  }
 
   .form-group
     %label Friendly Url
-    %input.form-control{name: "friendly_url", placeholder: "This will let you get by /my_cool_custom_url", type: "text"  }
+    %input.form-control{name: "post[friendly_url]", placeholder: "This will let you get by /my_cool_custom_url", type: "text"  }
       = post.friendly_url
   .checkbox
     %label.checkbox
-      %input{name: "publish", type: "checkbox"}
+      %input{name: "post[publish]", type: "checkbox"}
         Publish
-  %button.btn.btn-default{type: "submit"}= @post ? 'Update post' : 'Create post'
+  %button.btn.btn-default{type: "submit"}= @post.id ? 'Update post' : 'Create post'

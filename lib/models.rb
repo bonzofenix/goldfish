@@ -1,5 +1,6 @@
 require 'data_mapper'
-sqlite_path = "sqlite3://#{Dir.pwd}/db/#{ENV['RACK_ENV']}.db"
+sqlite_path = "sqlite3://#{ENV['HOME']}/db/application.db"
+puts "USING DB ON: #{sqlite_path}"
 DataMapper.setup(:default, ENV['DATABASE_URL'] || sqlite_path )
 DataMapper::Model.raise_on_save_failure = false
 

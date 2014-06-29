@@ -11,10 +11,15 @@ FactoryGirl.define do
 
   factory :post do
     title
-    short_description 'this is a short description'
     content 'some content'
     publish true
     date Time.now
+
+    trait :with_tag do
+      after :create do |post|
+        FactoryGirl.create_list :tag, 1, posts: [ post ]
+      end
+    end
   end
 
 
