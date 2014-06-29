@@ -1,7 +1,8 @@
 Goldfish
 ========
+[![Build Status](https://travis-ci.org/bonzofenix/client.png)](https://travis-ci.org/bonzofenix/goldfish)
 
-Simplest blog engine develop with sinatra and bootstrap.
+Simple blog engine develop with sinatra and bootstrap.
 
 Developed for [my personal web site](http://bonzofenix.com).
 
@@ -10,6 +11,7 @@ Play with the [example](goldfish.cfapps.io)(username: admin ,password: admin).
 ## Features:
 
 - CRUL for posts.
+
 - Markdown editor with Preview.
 - Tags.
 - Disquss.
