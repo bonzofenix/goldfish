@@ -4,19 +4,7 @@ Goldfish
 
 Simple blog engine develop with sinatra and bootstrap.
 
-Developed for [my personal web site](http://bonzofenix.com).
-
-Play with the [example](goldfish.cfapps.io)(username: admin ,password: admin).
-
-## Features:
-
-- CRUL for posts.
-
-- Markdown editor with Preview.
-- Tags.
-- Disquss.
-- Coderay.
-
+Check out ![This blog post](http://bonzofenix.com/posts/2014/6/goldfish:_blog_engine) to see all its features.
 
 ##Setting it up.
 
@@ -24,7 +12,7 @@ Play with the [example](goldfish.cfapps.io)(username: admin ,password: admin).
   cp config/application.example.ymp config/application.yml
   vi config/application.yml #set your personal configurations.
 
-  #push it to your favourite cloud!
+  #deploy it!!
 ```
 
 ## Running it locally to test your configurations:
