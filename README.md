@@ -4,7 +4,7 @@ Goldfish
 
 Simple blog engine develop with sinatra and bootstrap.
 
-Check out ![This blog post](http://bonzofenix.com/posts/2014/6/goldfish:_blog_engine) to see all its features.
+Check out [This blog post](http://bonzofenix.com/posts/2014/6/goldfish:_blog_engine) to see all its features.
 
 ##Setting it up.
 
