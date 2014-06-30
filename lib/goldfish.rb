@@ -76,7 +76,7 @@ class Goldfish < Sinatra::Base
   protect do
     post '/posts' do
       params['publish'] = (params['publish'] == 'on' ? true : false)
-      params['tags'] = params['tags'].split(',').collect do |name|
+      params['post']['tags'] = params['post']['tags'].split(',').collect do |name|
         Tag.first_or_create(name: name.strip )
       end
       Post.new(params['post']).save

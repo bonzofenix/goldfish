@@ -43,8 +43,8 @@ describe Goldfish do
 
       it 'POST on /posts' do
         expect do
-          post '/posts', {'post' => attributes_for(:post),
-            'tags' => 'tag_1, tag2'}
+          post '/posts', {'post' => attributes_for(:post).merge!(
+            'tags' => 'tag_1, tag2')}
         end.to change{ Post.all.count }.from(0).to(1)
       end
 
